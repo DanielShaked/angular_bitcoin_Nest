@@ -6,5 +6,23 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'angular-bitcoin';
+
+
+  navOptions = [
+    {
+      value: 'home', label: 'Home'
+    },
+    {
+      value: 'contacts', label: 'Contacts'
+    },
+    {
+      value: 'about', label: 'About'
+    }
+  ]
+
+  displayContent = this.navOptions[0]
+
+  onChangeDisplay(selectedDisplay: any) {
+    this.displayContent = selectedDisplay
+  }
 }

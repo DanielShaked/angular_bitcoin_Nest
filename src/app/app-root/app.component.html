@@ -1,3 +1,9 @@
 <section class="main-app">
-  <h1>Hi</h1>
+  <header>
+    <ul>
+      <li *ngFor="let navOption of navOptions" (click)="onChangeDisplay(navOption)">
+        {{navOption.label}}
+      </li>
+    </ul>
+  </header>
 </section>
