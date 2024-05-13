@@ -6,4 +6,12 @@
       </li>
     </ul>
   </header>
+
+  <main>
+
+    <h2>{{displayContent.label}}:</h2>
+    <section *ngIf="displayContent.value === 'home'">
+      <home></home>
+    </section>
+  </main>
 </section>

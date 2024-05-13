@@ -10,7 +10,8 @@ export class UserService {
 
   public getUser() {
     return {
-      fullname: 'Daniel Shaked'
+      fullname: 'Daniel Shaked',
+      coins: 100
     }
   }
 }
