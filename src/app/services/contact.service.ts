@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject, throwError, from, tap, retry, catchError } from 'rxjs';
+import { Observable, BehaviorSubject, throwError, from, tap, retry, catchError, take } from 'rxjs';
 // import { Contact } from '../models/contact.model';
-import { Contact } from './contact.model';
+import { Contact, FilterBy } from '../models/contact.model';
 import { storageService } from './async-storage.service';
 import { HttpErrorResponse } from '@angular/common/http';
 const ENTITY = 'contacts'
@@ -16,6 +16,9 @@ export class ContactService {
     private _contacts$ = new BehaviorSubject<Contact[]>([])
     public contacts$ = this._contacts$.asObservable()
 
+    private _filterBy$ = new BehaviorSubject<FilterBy>({ term: '' })
+    public filterBy$ = this._filterBy$.asObservable()
+
     constructor() {
         // Handling Demo Data, fetching from storage || saving to storage 
         const contacts = JSON.parse(localStorage.getItem(ENTITY) || 'null')
@@ -28,7 +31,7 @@ export class ContactService {
         return from(storageService.query<Contact>(ENTITY))
             .pipe(
                 tap(contacts => {
-                    const filterBy = { term: '' }
+                    const filterBy = this._filterBy$.value
                     if (filterBy && filterBy.term) {
                         contacts = this._filter(contacts, filterBy.term)
                     }
@@ -40,10 +43,10 @@ export class ContactService {
             )
     }
 
-    public getContactById(id: string): Observable<Contact> {
-        return from(storageService.get(ENTITY, id))
-            .pipe(catchError(err => throwError(() => `Contact id ${id} not found!`)))
-    }
+    // public getContactById(id: string): Observable<Contact> {
+    //     return from(storageService.get(ENTITY, id))
+    //     // .pipe(catchError(err => throwError(() => `Contact id ${id} not found!`)))
+    // }
 
     public deleteContact(id: string) {
         return from(storageService.remove(ENTITY, id))
@@ -81,6 +84,10 @@ export class ContactService {
                 retry(1),
                 catchError(this._handleError)
             )
+    }
+    public setFilter(filterBy: FilterBy) {
+        this._filterBy$.next(filterBy)
+        this.loadContacts().pipe(take(1)).subscribe()
     }
 
     private _addContact(contact: Contact) {
