@@ -1,0 +1,11 @@
+:host {
+    width: 100%;
+}
+
+.contact-list {
+    display: flex;
+    // flex-direction: column;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+}

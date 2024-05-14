@@ -6,12 +6,18 @@ import { AppComponent } from './app-root/app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ContactIndexComponent } from './pages/contact-index/contact-index.component';
+import { ContactListComponent } from './cmps/contact-list/contact-list.component';
+import { ContactPreviewComponent } from './cmps/contact-preview/contact-preview.component';
+import { ContactFilterComponent } from './cmps/contact-filter/contact-filter.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ContactIndexComponent,
+    ContactListComponent,
+    ContactPreviewComponent,
+    ContactFilterComponent,
   ],
   imports: [
     BrowserModule,

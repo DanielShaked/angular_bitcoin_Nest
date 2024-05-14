@@ -1,0 +1,25 @@
+:host {
+    border-radius: 0.5rem;
+    padding: 1rem;
+    border: 1px solid black;
+    width: 25%;
+
+    li {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .remove-btn {
+        background-color: transparent;
+        cursor: pointer;
+        border: 1px solid black;
+        border-radius: 2px;
+        width: 2rem;
+
+
+        &:hover {
+            background-color: tomato;
+        }
+    }
+}
